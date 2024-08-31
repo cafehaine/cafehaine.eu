@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>CaféHaine</title>
+    <link rel="stylesheet" href="style.css"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" href="avatar.svg" />
+  </head>
+  <body class="nojs">
+    <noscript>
+      <p style="color: white;">Javascript isn't required, but allows a lot more features to work :)</p>
+    </noscript>
+    <div id="windows">
+      <dialog class="window active" open id="window-0">
+        <input id="window-0-reduce" name="reduce" type="checkbox">
+        <div class="border tl"></div>
+        <div class="border t"></div>
+        <div class="border tr"></div>
+        <div class="border l"></div>
+        <header>
+          <img src="apps/about-me/icon.svg"/>
+          <h1>CaféHaine</h1>
+          <aside>
+            <label class="reduce" for="window-0-reduce" aria-label="reduce"><img src="reduce.svg"></label>
+            <button class="toggle" aria-label="maximize/minimize"><img src="maximize.svg"></button>
+            <button class="close" aria-label="close"><img src="close.svg"></button>
+          </aside>
+        </header>
+        <main>
+          <nav>
+            <label aria-label="show/hide nav"><input type="checkbox"></label>
+            <ul>
+              <li><a href="https://gitlab.com/cafehaine">Gitlab</a></li>
+              <li><a href="https://github.com/cafehaine">GitHub</a></li>
+              <li><a href="https://fosstodon.org/@cafehaine">@cafehaine@fosstodon.org</a></li>
+              <li><a href="https://cafehaine.itch.io/">Itch.io</a></li>
+              <li><a href="https://code.golf/golfers/cafehaine">Code.golf</a></li>
+            </ul>
+          </nav>
+          <section>
+            <h2>About me</h2>
+            <p>Hi! I'm CaféHaine, a french guy that loves open source :)</p>
+            <p>These days, I mostly write code in python, but I've had experience with many different languages.</p>
+            <footer>
+              <p>The source for this site is available here: <a href="https://github.com/cafehaine/cafehaine.eu">https://github.com/cafehaine/cafehaine.eu</a></p>
+              <p>The Code.golf icon is taken from their website</p>
+              <p>Other icons are from <a href="https://github.com/edent/SuperTinyIcons">Terence Eden's SuperTinyIcons GitHub project</a></p>
+              <p>The background/wallpaper is <a href="https://www.pexels.com/fr-fr/photo/aurores-boreales-360912/">Visit Greenland's photo</a></p>
+            </footer>
+          </section>
+        </main>
+        <div class="border r"></div>
+        <div class="border b"></div>
+        <div class="border bl"></div>
+        <div class="border br"></div>
+      </dialog>
+    </div>
+    <div id="taskbar">
+      <button id="orb">
+        <img id="orbLogo" src="avatar.svg" alt="CaféHaine's avatar"/>
+      </button>
+      <dialog id="startMenu">
+        <nav class="jsonly">
+          <ul>
+            <li>Coming soon :)</li>
+            <!--
+            <li><button data-app="about-me"><img src="apps/about-me/icon.svg"><span>About me</span></button></li>
+            <li><button data-app="minesweeper"><img src="apps/minesweeper/icon.svg"><span>Minesweeper</span></button></li>
+            -->
+          </ul>
+          <input type="search" disabled/>
+        </nav>
+        <aside>
+          <ul>
+            <li><a href="https://gitlab.com/cafehaine">Gitlab</a></li>
+            <li><a href="https://github.com/cafehaine">GitHub</a></li>
+            <li><a href="https://fosstodon.org/@cafehaine">@cafehaine@fosstodon.org</a></li>
+            <li><a href="https://cafehaine.itch.io/">Itch.io</a></li>
+            <li><a href="https://code.golf/golfers/cafehaine">Code.golf</a></li>
+          </ul>
+        </aside>
+      </dialog>
+      <ul id="windowList">
+        <!-- Will be cleared and refilled by JS -->
+        <li><label for="window-0-reduce" class="active"><img src="apps/about-me/icon.svg"/><span>CaféHaine</span></label></li>
+      </ul>
+      <aside class="jsonly"><time>00:00 AM</time></aside>
+    </div>
+    <div id="sidebar">
+      <section id="clock" style="--hours: 10; --minutes: 9; --seconds: 30;">
+        <ul class="dial">
+          <li style="--num: 12"></li>
+          <li style="--num: 1"></li>
+          <li style="--num: 2"></li>
+          <li style="--num: 3"></li>
+          <li style="--num: 4"></li>
+          <li style="--num: 5"></li>
+          <li style="--num: 6"></li>
+          <li style="--num: 7"></li>
+          <li style="--num: 8"></li>
+          <li style="--num: 9"></li>
+          <li style="--num: 10"></li>
+          <li style="--num: 11"></li>
+        </ul>
+        <div class="hours"></div>
+        <div class="minutes"></div>
+        <div class="seconds"></div>
+      </section>
+      <!-- TODO instagram/pixelfed feed
+      <section id="gallery">
+      </section>
+      -->
+      <!-- TODO blog rss reader
+      <section id="rss">
+      </section>
+      -->
+      <section id="post-it">
+        <p contenteditable>Frutiger aero 4 lyf</p>
+      </section>
+    </div>
+
+    <template id="windowTemplate">
+      <dialog class="window">
+        <input id="" name="reduce" type="checkbox">
+        <div class="border tl"></div>
+        <div class="border t"></div>
+        <div class="border tr"></div>
+        <div class="border l"></div>
+        <header>
+          <img src=""/>
+          <h1></h1>
+          <aside>
+            <label class="reduce" for="" aria-label="reduce"><img src="reduce.svg"></label>
+            <button class="toggle" aria-label="maximize/minimize"><img src="maximize.svg"></button>
+            <button class="close" aria-label="close"><img src="close.svg"></button>
+          </aside>
+        </header>
+        <main>
+        </main>
+        <div class="border r"></div>
+        <div class="border b"></div>
+        <div class="border bl"></div>
+        <div class="border br"></div>
+      </dialog>
+    </template>
+
+    <script src="script.js"></script>
+  </body>
+</html>

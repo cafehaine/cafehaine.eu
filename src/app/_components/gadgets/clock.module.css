@@ -1,0 +1,97 @@
+.clock {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(#fff4e0 60%, black 90%);
+  border: 5px solid #393939;
+  box-sizing: content-box;
+  position: relative;
+  flex-shrink: 0;
+
+
+  &::after {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    content: "";
+    top: 0;
+    left: 0;
+    background: linear-gradient(rgba(255, 255, 255, 0.4), transparent);
+    border-radius: 50%;
+  }
+
+  & .hand {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    /* Transition curve with slight overshoot */
+    transition: transform 0.2s cubic-bezier(0.000, 1.650, 0.460, 0.895);
+    /* TODO find a way to prevent the weird jump at 0 */
+  }
+
+  & .hours {
+    transform: rotate(calc(180deg + var(--hours) * 30deg));
+  }
+
+  & .hours::before {
+    content: "";
+    width: 7px;
+    height: 45px;
+    background: #444;
+    position: absolute;
+    transform: translateX(-50%) translateY(-5%);
+    border-radius: 3px;
+    box-shadow: 0 0 2px black;
+  }
+
+  & .minutes {
+    transform: rotate(calc(180deg + var(--minutes) * 6deg));
+  }
+
+  & .minutes::before {
+    content: "";
+    width: 5px;
+    height: 60px;
+    background: #444;
+    position: absolute;
+    transform: translateX(-50%) translateY(-5%);
+    border-radius: 3px;
+    box-shadow: 0 0 2px black;
+  }
+
+  & .seconds {
+    transform: rotate(calc(180deg + var(--seconds) * 6deg));
+  }
+
+  & .seconds::before {
+    content: "";
+    width: 3px;
+    height: 70px;
+    background: #df1616;
+    position: absolute;
+    transform: translateX(-50%) translateY(-5%);
+    border-radius: 3px;
+    box-shadow: 0 0 2px black;
+  }
+
+  & .dial {
+    margin: 0;
+    padding: 0;
+    transform: translateX(50%) translateY(50%);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
+
+  & .dial li {
+    list-style: none;
+    position: absolute;
+    left: calc(72px * cos(var(--num) * 30deg - 90deg));
+    top: calc(72px * sin(var(--num) * 30deg - 90deg));
+    transform: translateX(-50%) translateY(-50%);
+    font-family: serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #444;
+  }
+}

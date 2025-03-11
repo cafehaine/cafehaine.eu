@@ -1,0 +1,12 @@
+.sidebar {
+  background: linear-gradient(to right, transparent, black);
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 0;
+}

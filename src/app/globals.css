@@ -1,0 +1,30 @@
+/*********/
+/* Reset */
+/*********/
+
+* {
+  font-family: system-ui, sans-serif, sans;
+}
+
+/********/
+/* Body */
+/********/
+
+body {
+  height: 100vh;
+  width: 100vw;
+  background: no-repeat url("wallpaper.jpg");
+  background-size: cover;
+  background-position: center;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+
+  --taskbar-height: 32px;
+  --icon-height: 24px;
+  --border-size: 7px;
+  --glass-color: #b91d1d5e;
+  --active-border-color: #FF5C5C;
+  --blur-radius: 3px;
+}
+

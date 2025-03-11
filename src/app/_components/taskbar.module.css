@@ -1,0 +1,211 @@
+.taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: calc(var(--taskbar-height) - 1px);
+  padding: 4px 0 4px 0;
+
+  box-sizing: border-box;
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+
+  background: var(--glass-color);
+  background-image: url(reflections.png);
+  background-size: max(100vw, 100vh) auto;
+  background-position: 0 calc(-100vh + var(--taskbar-height));
+  background-repeat: no-repeat;
+
+  box-shadow: 0 0 10px black;
+
+  backdrop-filter: blur(var(--blur-radius));
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  color: white;
+  z-index: 1000;
+}
+
+.taskbar.hasMaximizedWindows {
+  box-shadow: none;
+}
+
+.orb {
+  position: relative;
+  margin: -5px 10px -5px 10px;
+  width: 52px;
+  height: 0;
+  background: transparent none;
+  border: none;
+}
+
+.orb::before {
+  content: "";
+  border-radius: 50%;
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(black, red);
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translateX(-2px) translateY(-50%);
+  clip-path: inset(41px 0px 42px 0px);
+}
+
+.orb::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  background: radial-gradient(circle at 50% 90%, red, transparent 35%), linear-gradient(rgba(255, 255, 255, 0.7), transparent 25%);
+  z-index: 1000;
+}
+
+.orb:hover::after {
+  background: radial-gradient(circle at 25% 45%, red, transparent 35%), linear-gradient(rgba(255, 255, 255, 0.7), transparent 12.5%);
+  background-size: 200% 200%;
+}
+
+.orbLogo {
+  position: absolute;
+  left: 0; top: 0;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  z-index: 1000;
+}
+
+.startMenu {
+  position: absolute;
+  left: 0;
+  bottom: var(--taskbar-height);
+  padding: 8px;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+
+  box-sizing: border-box;
+  border-radius: 5px 5px 0 0;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  outline: 1px solid black;
+
+  background: var(--glass-color);
+  background-image: url(reflections.png);
+  background-size: max(100vw, 100vh) auto;
+  background-position: 0 calc(-100vh + var(--taskbar-height));
+  background-repeat: no-repeat;
+
+  box-shadow: 0 0 10px black;
+
+  backdrop-filter: blur(var(--blur-radius));
+
+  & nav {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    & ul {
+      flex-grow: 1;
+      background: #FBF6F6;
+      color: #000;
+      border: 1px solid black;
+      border-radius: 2px;
+      outline: 1px solid white;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      & li {
+        list-style: none;
+        & button {
+          background: none;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          width: 100%;
+          padding: 5px 5px;
+          font-size: 1em;
+          border-radius: 3px;
+          box-sizing: border-box;
+          border: 1px solid transparent;
+          & img {
+            width: calc(var(--icon-height) * 1.5);
+          }
+        }
+        & button:hover {
+          background-image: linear-gradient(white, #bdbdbd);
+          border: 1px solid #6C6C6C;
+        }
+      }
+    }
+  }
+
+  & aside {
+    display: flex;
+    flex-direction: column;
+
+    & ul {
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      & li {
+        list-style: none;
+        & a {
+          color: white;
+          text-shadow: 0 0 5px black;
+        }
+      }
+    }
+  }
+}
+
+.windowList {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+
+  & li {
+    list-style: none;
+
+    & button {
+      background: none transparent;
+      border: none;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 180px;
+      border-radius: 3px;
+      outline: 1px solid #FFFFFF8A;
+
+      & img {
+        width: var(--icon-height);
+        height: var(--icon-height);
+      }
+    }
+    & label.active {
+      box-shadow: inset 0 0 4px black;
+    }
+  }
+}
+
+.taskbar > aside {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  text-shadow: 0 0 5px black;
+}

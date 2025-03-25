@@ -7,6 +7,7 @@ import Desktop from "./_components/desktop";
 import About from "./_apps/about";
 import Taskbar from "./_components/taskbar";
 import { DragType, MousePosition, WindowContext, WindowManagerContext } from "./_contexts/windowManager";
+import Spinner from "./_components/spinner";
 
 export default function Home() {
   const [windows, setWindows] = useState<CustomWindow[]>([new About()]);
@@ -16,8 +17,6 @@ export default function Home() {
   const [focusedWindow, setFocusedWindow] = useState<CustomWindow | null>(windows[0]);
   const [reducedWindows, setReducedWindows] = useState<CustomWindow[]>([]);
   const [maximizedWindows, setMaximizedWindows] = useState<CustomWindow[]>([]);
-
-  console.log({draggedWindow, dragType})
 
   const closeWindow = (window: CustomWindow): void => {
     let index = windows.indexOf(window);
@@ -88,6 +87,7 @@ export default function Home() {
         }
       }>
         <Desktop />
+        <Spinner />
         {
           windows.map((window, index) =>
             !reducedWindows.includes(window) ?

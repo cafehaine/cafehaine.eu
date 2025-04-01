@@ -1,5 +1,7 @@
 # https://cafehaine.eu
 
+<img alt="Preview of my website" src="preview.png" width=400>
+
 ## About
 
 This web app is a recreation of a Windows Vista/Seven inspired desktop, with

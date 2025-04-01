@@ -74,7 +74,8 @@
 
 .orbLogo {
   position: absolute;
-  left: 0; top: 0;
+  left: 0;
+  top: 0;
   transform: translateY(-50%);
   width: 48px;
   height: 48px;
@@ -123,8 +124,10 @@
       margin: 0;
       display: flex;
       flex-direction: column;
+
       & li {
         list-style: none;
+
         & button {
           background: none;
           display: flex;
@@ -136,10 +139,12 @@
           border-radius: 3px;
           box-sizing: border-box;
           border: 1px solid transparent;
+
           & img {
             width: calc(var(--icon-height) * 1.5);
           }
         }
+
         & button:hover {
           background-image: linear-gradient(white, #bdbdbd);
           border: 1px solid #6C6C6C;
@@ -158,8 +163,10 @@
       display: flex;
       flex-direction: column;
       gap: 5px;
+
       & li {
         list-style: none;
+
         & a {
           color: white;
           text-shadow: 0 0 5px black;
@@ -188,19 +195,21 @@
       width: 180px;
       border-radius: 3px;
       outline: 1px solid #FFFFFF8A;
+      color: #ffffff;
 
       & img {
         width: var(--icon-height);
         height: var(--icon-height);
       }
     }
+
     & label.active {
       box-shadow: inset 0 0 4px black;
     }
   }
 }
 
-.taskbar > aside {
+.taskbar>aside {
   position: absolute;
   right: 0;
   top: 0;

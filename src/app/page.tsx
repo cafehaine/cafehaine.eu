@@ -7,7 +7,6 @@ import Desktop from "./_components/desktop";
 import About from "./_apps/about";
 import Taskbar from "./_components/taskbar";
 import { DragType, MousePosition, WindowContext, WindowManagerContext } from "./_contexts/windowManager";
-import Spinner from "./_components/spinner";
 
 export default function Home() {
   const [windows, setWindows] = useState<CustomWindow[]>([new About()]);
@@ -87,7 +86,6 @@ export default function Home() {
         }
       }>
         <Desktop />
-        <Spinner />
         {
           windows.map((window, index) =>
             !reducedWindows.includes(window) ?

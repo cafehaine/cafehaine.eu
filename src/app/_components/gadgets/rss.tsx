@@ -1,13 +1,23 @@
-import React, {ReactNode, useEffect, useState} from "react"
+import React, { ReactNode, useEffect, useState } from "react"
 import sanitizeHtml from "sanitize-html"
 import Gadget from "./gadget"
 import styles from "./rss.module.css"
-import Spinner from "../spinner" 
+import Spinner from "../spinner"
 
 enum Source {
-  Fosstodon = "@cafehaine@fosstodon.org",
-  Twitter = "@cafehaine",
+  Fosstodon = "fosstodon",
+  Twitter = "twitter",
+  Itch = "itch.io",
+  Unknown = "?",
 }
+
+const DOMAIN_SOURCE_MAP = {
+  "fosstodon.org": Source.Fosstodon,
+  "cafehaine.itch.io": Source.Itch,
+  "gemma-pricot.itch.io": Source.Itch,
+  "itch.io": Source.Itch,
+  "nitter.poast.org": Source.Twitter,
+};
 
 type Article = {
   title: string,
@@ -43,18 +53,20 @@ function RSSComponent(): React.ReactNode {
         const feed = await response.json();
         const newArticles: Article[] = []
         for (const item of feed.items) {
-          const content = sanitizeHtml(item["content_html"], {allowedTags: [], allowedAttributes: {}});
-          const title = sanitizeHtml(item["title"], {allowedTags: [], allowedAttributes: {}}) || content;
+          const content = sanitizeHtml(item["content_html"], { allowedTags: [], allowedAttributes: {} });
+          const title = sanitizeHtml(item["title"], { allowedTags: [], allowedAttributes: {} }) || content;
           const url = new URL(item["url"])
           const article: Article = {
             title: title,
             content: content,
             url: url,
             datePublished: new Date(item["date_published"]),
-            source: url.hostname == "fosstodon.org" ? Source.Fosstodon : Source.Twitter,
+            source: DOMAIN_SOURCE_MAP[url.hostname] || Source.Unknown,
           }
+          console.log({hostname: url.hostname, source: article.source})
           newArticles.push(article)
         }
+        newArticles.sort((a, b) => b.datePublished - a.datePublished);
         setArticles(newArticles);
       } catch {
         setArticles(RequestState.Failed)

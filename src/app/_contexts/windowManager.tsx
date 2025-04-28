@@ -9,9 +9,14 @@ export enum DragType {
   Left = 8,
 }
 
-export type MousePosition = {
-  x: Number;
-  y: Number;
+export type Position = {
+  x: number;
+  y: number;
+}
+
+export type Drag = {
+  dragType: DragType,
+  lastPosition: Position,
 }
 
 export type WindowProps = {
@@ -20,9 +25,7 @@ export type WindowProps = {
   setMaximized: (maximized: boolean) => void;
   close: () => void;
   reduce: () => void;
-  setDragging: () => void;
-  setDragType: (dragType: DragType) => void;
-  setDragStart: (coordinates: MousePosition) => void;
+  setDragging: (drag: Drag) => void;
 }
 
 type WindowManager = {
@@ -38,12 +41,10 @@ export const WindowContext = createContext<WindowProps>(
   {
     focused: false,
     maximized: false,
-    setMaximized: (maximized) => { },
+    setMaximized: (maximized: boolean) => { },
     close: () => { },
     reduce: () => { },
-    setDragging: () => { },
-    setDragType: (dragType) => {},
-    setDragStart: (coordinates) => {},
+    setDragging: (drag: Drag) => { },
   }
 );
 export const WindowManagerContext = createContext<WindowManager>(

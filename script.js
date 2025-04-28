@@ -82,14 +82,6 @@ function smartifyWindow(win) {
   const toggleButton = win.querySelector(".toggle");
   const closeButton = win.querySelector(".close");
 
-  // Remove css hardcoded centered position
-  const rect = win.getBoundingClientRect();
-  win.style.transform = "none";
-  win.style.setProperty("--left", `${rect.x}px`)
-  win.style.setProperty("--top", `${rect.y}px`)
-  win.style.setProperty("--width", `${rect.width}px`)
-  win.style.setProperty("--height", `${rect.height}px`)
-
   win.onclick = (evt) => {
     startMenu.close()
     setActiveWindow(win);

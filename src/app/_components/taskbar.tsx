@@ -7,10 +7,7 @@ import About from '../_apps/about';
 import Minesweeper from '../_apps/minesweeper';
 import styles from "./taskbar.module.css"
 
-export default function Taskbar({ hasMaximizedWindows }: { hasMaximizedWindows: boolean }) {
-  const windowManager = useContext(WindowManagerContext);
-  const [showStartMenu, setShowStartMenu] = useState(false);
-
+export function Clock() {
   const [time, setTime] = useState<Date>(new Date(0))
 
   useEffect(() => {
@@ -20,6 +17,15 @@ export default function Taskbar({ hasMaximizedWindows }: { hasMaximizedWindows: 
       clearInterval(interval);
     }
   }, [])
+
+  return (
+      <time>{time.toLocaleTimeString()}</time>
+  );
+}
+
+export default function Taskbar({ hasMaximizedWindows }: { hasMaximizedWindows: boolean }) {
+  const windowManager = useContext(WindowManagerContext);
+  const [showStartMenu, setShowStartMenu] = useState(false);
 
   return (
     <div className={`${styles.taskbar} ${hasMaximizedWindows ? styles.hasMaximizedWindows : ""}`}>
@@ -63,7 +69,7 @@ export default function Taskbar({ hasMaximizedWindows }: { hasMaximizedWindows: 
           )
         }
       </ul>
-      <aside><time>{time.toLocaleTimeString()}</time></aside>
+      <aside><Clock /></aside>
     </div>
   )
 }

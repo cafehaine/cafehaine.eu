@@ -4,38 +4,84 @@ import Image from "next/image";
 import reduceIcon from "./reduce.svg"
 import maximizeIcon from "./maximize.svg"
 import closeIcon from "./close.svg"
-import { DragType, WindowProps, WindowContext } from "../_contexts/windowManager";
+import { DragType, Drag, WindowProps, WindowContext, Position } from "../_contexts/windowManager";
 import styles from "./window.module.css"
+import assert from "assert";
+
+export type Rect = {
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+}
 
 export default abstract class CustomWindow {
   title: string;
+  rect: Rect | null;
   abstract icon(): React.ReactNode
   abstract content(): React.ReactNode
 
   constructor(title: string) {
     this.title = title;
+    this.rect = null;
   }
 
-  onDragStart(window: WindowProps, event: React.MouseEvent | React.TouchEvent, dragType: DragType) {
-    window.setDragging();
-    window.setDragType(dragType);
-    console.log(event)
+  onDragStart(window: WindowProps, event: React.MouseEvent | React.TouchEvent, dragType: DragType): void {
+    if (this.rect === null) {
+      const elm = event.target as HTMLElement;
+      const dialog = elm.closest("dialog");
+      assert(dialog)
+      this.rect = { x: dialog.offsetLeft, y: dialog.offsetTop, width: dialog.clientWidth, height: dialog.clientHeight }
+    }
+    var position: Position;
     if (event.nativeEvent instanceof MouseEvent)
-      window.setDragStart({x: event.nativeEvent.clientX, y: event.nativeEvent.clientY})
+      position = { x: event.nativeEvent.clientX, y: event.nativeEvent.clientY }
     else
-      window.setDragStart({x: event.nativeEvent.touches[0].clientX, y: event.nativeEvent.touches[0].clientY})
+      position = { x: event.nativeEvent.touches[0].clientX, y: event.nativeEvent.touches[0].clientY }
+    window.setDragging({ dragType: dragType, lastPosition: position })
+  }
+
+  onDrag(drag: Drag, current: Position): void {
+    if (drag.dragType == DragType.Window) {
+      const deltaX = current.x - drag.lastPosition.x;
+      const deltaY = current.y - drag.lastPosition.y;
+      assert(this.rect)
+      this.rect.x += deltaX
+      this.rect.y += deltaY
+    } else {
+      console.log("TODO RESIZE")
+      if (drag.dragType & DragType.Top) {
+        
+      }
+      if (drag.dragType & DragType.Right) {
+        
+      }
+      if (drag.dragType & DragType.Bottom) {
+        
+      }
+      if (drag.dragType & DragType.Left) {
+        
+      }
+    }
   }
 
   render(): React.ReactNode {
     return (
       <WindowContext.Consumer>
         {
-          window => <div className={`${styles.window} ${window.maximized ? styles.maximized : ""}`}>
-            <div className={`${styles.border} ${styles.tl}`} onMouseDown={(e) => {this.onDragStart(window, e, DragType.Top | DragType.Left)}}></div>
-            <div className={`${styles.border} ${styles.t}`} onMouseDown={(e) => {this.onDragStart(window, e, DragType.Top)}}></div>
-            <div className={`${styles.border} ${styles.tr}`} onMouseDown={(e) => {this.onDragStart(window, e, DragType.Top | DragType.Right)}}></div>
-            <div className={`${styles.border} ${styles.l}`} onMouseDown={(e) => {this.onDragStart(window, e, DragType.Left)}}></div>
-            <header onDoubleClick={() => window.setMaximized(!window.maximized)} onMouseDown={(e) => {this.onDragStart(window, e, DragType.Window)}}>
+          window => <dialog className={`${styles.window} ${window.maximized ? styles.maximized : ""}`} style={
+            this.rect ? {
+              "--left": `${this.rect.x}px`,
+              "--top": `${this.rect.y}px`,
+              "--width": `${this.rect.width}px`,
+              "--height": `${this.rect.height}px`,
+            } as React.CSSProperties : {}
+          }>
+            <div className={`${styles.border} ${styles.tl}`} onMouseDown={(e) => { this.onDragStart(window, e, DragType.Top | DragType.Left) }}></div>
+            <div className={`${styles.border} ${styles.t}`} onMouseDown={(e) => { this.onDragStart(window, e, DragType.Top) }}></div>
+            <div className={`${styles.border} ${styles.tr}`} onMouseDown={(e) => { this.onDragStart(window, e, DragType.Top | DragType.Right) }}></div>
+            <div className={`${styles.border} ${styles.l}`} onMouseDown={(e) => { this.onDragStart(window, e, DragType.Left) }}></div>
+            <header onDoubleClick={() => window.setMaximized(!window.maximized)} onMouseDown={(e) => { this.onDragStart(window, e, DragType.Window) }}>
               <div onDoubleClick={window.close}>{this.icon()}</div>
               <h1>{this.title}</h1>
               <aside>
@@ -47,11 +93,11 @@ export default abstract class CustomWindow {
             <main>
               {this.content()}
             </main>
-            <div className={`${styles.border} ${styles.r}`} onMouseDown={(e) => {this.onDragStart(window, e, DragType.Right)}}></div>
-            <div className={`${styles.border} ${styles.b}`} onMouseDown={(e) => {this.onDragStart(window, e, DragType.Bottom)}}></div>
-            <div className={`${styles.border} ${styles.bl}`} onMouseDown={(e) => {this.onDragStart(window, e, DragType.Bottom | DragType.Left)}}></div>
-            <div className={`${styles.border} ${styles.br}`} onMouseDown={(e) => {this.onDragStart(window, e, DragType.Bottom | DragType.Right)}}></div>
-          </div>
+            <div className={`${styles.border} ${styles.r}`} onMouseDown={(e) => { this.onDragStart(window, e, DragType.Right) }}></div>
+            <div className={`${styles.border} ${styles.b}`} onMouseDown={(e) => { this.onDragStart(window, e, DragType.Bottom) }}></div>
+            <div className={`${styles.border} ${styles.bl}`} onMouseDown={(e) => { this.onDragStart(window, e, DragType.Bottom | DragType.Left) }}></div>
+            <div className={`${styles.border} ${styles.br}`} onMouseDown={(e) => { this.onDragStart(window, e, DragType.Bottom | DragType.Right) }}></div>
+          </dialog>
         }
       </WindowContext.Consumer>
     );

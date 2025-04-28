@@ -1,18 +1,18 @@
 'use client';
 
 import { useState } from "react";
+import assert from "assert";
 
 import CustomWindow from './_apps/window';
 import Desktop from "./_components/desktop";
 import About from "./_apps/about";
 import Taskbar from "./_components/taskbar";
-import { DragType, MousePosition, WindowContext, WindowManagerContext } from "./_contexts/windowManager";
+import { DragType, Drag, WindowContext, WindowManagerContext } from "./_contexts/windowManager";
 
 export default function Home() {
   const [windows, setWindows] = useState<CustomWindow[]>([new About()]);
   const [draggedWindow, setDraggedWindow] = useState<CustomWindow | null>(null);
-  const [dragType, setDragType] = useState<DragType>(DragType.Window);
-  const [dragStart, setDragStart] = useState<MousePosition>({x: 0, y: 0})
+  const [drag, setDrag] = useState<Drag | null>(null);
   const [focusedWindow, setFocusedWindow] = useState<CustomWindow | null>(windows[0]);
   const [reducedWindows, setReducedWindows] = useState<CustomWindow[]>([]);
   const [maximizedWindows, setMaximizedWindows] = useState<CustomWindow[]>([]);
@@ -63,7 +63,11 @@ export default function Home() {
   const onMouseMove = (e: React.MouseEvent): void => {
     if (draggedWindow === null)
       return
-    console.log("Dragging window!")
+    assert(drag != null)
+    const position = {x: e.clientX, y: e.clientY}
+    draggedWindow.onDrag(drag, position)
+    setWindows([...windows])
+    setDrag({dragType: drag.dragType, lastPosition: position})
   }
 
   const onMouseUp = (e: React.MouseEvent): void => {
@@ -74,7 +78,7 @@ export default function Home() {
   }
 
   return (
-    <div onMouseMove={onMouseMove} onMouseUp={onMouseUp}>
+    <div onMouseMove={onMouseMove} onMouseUp={onMouseUp} style={{width: "100vw", height: "100vh"}}>
       <WindowManagerContext.Provider value={
         {
           windows,
@@ -96,9 +100,7 @@ export default function Home() {
                   setMaximized: (maximized) => setMaximizedWindow(window, maximized),
                   close: () => closeWindow(window),
                   reduce: () => reduceWindow(window),
-                  setDragging: () => setDraggedWindow(window),
-                  setDragType,
-                  setDragStart,
+                  setDragging: (drag) => {setDraggedWindow(window); setDrag(drag)},
                 }
               }>
                 {window.render()}

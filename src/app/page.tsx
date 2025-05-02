@@ -73,7 +73,6 @@ export default function Home() {
   const onMouseUp = (_e: React.MouseEvent): void => {
     if (draggedWindow === null)
       return
-    console.log("Stopping window drag!")
     setDraggedWindow(null)
   }
 

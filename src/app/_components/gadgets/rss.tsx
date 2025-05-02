@@ -63,7 +63,6 @@ function RSSComponent(): React.ReactNode {
             datePublished: new Date(item["date_published"]),
             source: DOMAIN_SOURCE_MAP.get(url.hostname) || Source.Unknown,
           }
-          console.log({ hostname: url.hostname, source: article.source })
           newArticles.push(article)
         }
         newArticles.sort((a, b) => b.datePublished.getTime() - a.datePublished.getTime());

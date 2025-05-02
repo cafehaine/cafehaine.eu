@@ -8,7 +8,7 @@ import Minesweeper from '../_apps/minesweeper';
 import styles from "./taskbar.module.css"
 
 export function Clock() {
-  const [time, setTime] = useState<Date>(new Date(0))
+  const [time, setTime] = useState<Date | null>(null)
 
   useEffect(() => {
     setTime(new Date())
@@ -19,7 +19,7 @@ export function Clock() {
   }, [])
 
   return (
-      <time>{time.toLocaleTimeString()}</time>
+      <time>{time ? time.toLocaleTimeString() : "00:00:00"}</time>
   );
 }
 

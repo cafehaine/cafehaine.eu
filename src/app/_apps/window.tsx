@@ -31,7 +31,7 @@ export default abstract class CustomWindow {
       const elm = event.target as HTMLElement;
       const dialog = elm.closest("dialog");
       assert(dialog)
-      this.rect = { x: dialog.offsetLeft, y: dialog.offsetTop, width: dialog.clientWidth, height: dialog.clientHeight }
+      this.rect = { x: dialog.offsetLeft - dialog.clientWidth / 2, y: dialog.offsetTop - dialog.clientHeight / 2, width: dialog.clientWidth, height: dialog.clientHeight }
     }
     var position: Position;
     if (event.nativeEvent instanceof MouseEvent)
@@ -42,25 +42,27 @@ export default abstract class CustomWindow {
   }
 
   onDrag(drag: Drag, current: Position): void {
+    const deltaX = current.x - drag.lastPosition.x;
+    const deltaY = current.y - drag.lastPosition.y;
+    assert(this.rect)
+
     if (drag.dragType == DragType.Window) {
-      const deltaX = current.x - drag.lastPosition.x;
-      const deltaY = current.y - drag.lastPosition.y;
-      assert(this.rect)
       this.rect.x += deltaX
       this.rect.y += deltaY
     } else {
-      console.log("TODO RESIZE")
       if (drag.dragType & DragType.Top) {
-        
+        this.rect.y += deltaY
+        this.rect.height -= deltaY
       }
       if (drag.dragType & DragType.Right) {
-        
+        this.rect.width += deltaX
       }
       if (drag.dragType & DragType.Bottom) {
-        
+        this.rect.height += deltaY
       }
       if (drag.dragType & DragType.Left) {
-        
+        this.rect.x += deltaX
+        this.rect.width -= deltaX
       }
     }
   }
@@ -75,6 +77,7 @@ export default abstract class CustomWindow {
               "--top": `${this.rect.y}px`,
               "--width": `${this.rect.width}px`,
               "--height": `${this.rect.height}px`,
+              "transform": "none",
             } as React.CSSProperties : {}
           }>
             <div className={`${styles.border} ${styles.tl}`} onMouseDown={(e) => { this.onDragStart(window, e, DragType.Top | DragType.Left) }}></div>

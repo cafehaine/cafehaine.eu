@@ -33,7 +33,7 @@ export default abstract class CustomWindow {
       assert(dialog)
       this.rect = { x: dialog.offsetLeft - dialog.clientWidth / 2, y: dialog.offsetTop - dialog.clientHeight / 2, width: dialog.clientWidth, height: dialog.clientHeight }
     }
-    var position: Position;
+    let position: Position;
     if (event.nativeEvent instanceof MouseEvent)
       position = { x: event.nativeEvent.clientX, y: event.nativeEvent.clientY }
     else
@@ -93,7 +93,7 @@ export default abstract class CustomWindow {
                 <button className={styles.close} aria-label="close" onClick={window.close}><Image src={closeIcon} alt="Close window icon" /></button>
               </aside>
             </header>
-            <main>
+            <main className={styles.main}>
               {this.content()}
             </main>
             <div className={`${styles.border} ${styles.r}`} onMouseDown={(e) => { this.onDragStart(window, e, DragType.Right) }}></div>

@@ -32,7 +32,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <noscript>
-          <p style={{"color": "white"}}>Javascript isn't required, but allows a lot more features to work :)</p>
+          <p style={{"color": "white"}}>Javascript isn&apos;t required, but allows a lot more features to work :)</p>
         </noscript>
         {children}
       </body>

@@ -7,7 +7,7 @@ import CustomWindow from './_apps/window';
 import Desktop from "./_components/desktop";
 import About from "./_apps/about";
 import Taskbar from "./_components/taskbar";
-import { DragType, Drag, WindowContext, WindowManagerContext } from "./_contexts/windowManager";
+import { Drag, WindowContext, WindowManagerContext } from "./_contexts/windowManager";
 
 export default function Home() {
   const [windows, setWindows] = useState<CustomWindow[]>([new About()]);
@@ -18,7 +18,7 @@ export default function Home() {
   const [maximizedWindows, setMaximizedWindows] = useState<CustomWindow[]>([]);
 
   const closeWindow = (window: CustomWindow): void => {
-    let index = windows.indexOf(window);
+    const index = windows.indexOf(window);
     if (index > -1) {
       windows.splice(index, 1);
     }
@@ -35,7 +35,7 @@ export default function Home() {
     if (maximized) {
       setMaximizedWindows([...maximizedWindows, window])
     } else {
-      let index = maximizedWindows.indexOf(window);
+      const index = maximizedWindows.indexOf(window);
       if (index > -1) {
         maximizedWindows.splice(index, 1)
         setMaximizedWindows([...maximizedWindows])
@@ -49,7 +49,7 @@ export default function Home() {
     if (focusedWindow === window) {
       reduceWindow(window)
     } else {
-      let index = reducedWindows.indexOf(window);
+      const index = reducedWindows.indexOf(window);
       if (index > -1) {
         reducedWindows.splice(index, 1)
         setReducedWindows([...reducedWindows])
@@ -70,7 +70,7 @@ export default function Home() {
     setDrag({dragType: drag.dragType, lastPosition: position})
   }
 
-  const onMouseUp = (e: React.MouseEvent): void => {
+  const onMouseUp = (_e: React.MouseEvent): void => {
     if (draggedWindow === null)
       return
     console.log("Stopping window drag!")

@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import styles from "./desktop.module.css"
 import Clock from "./gadgets/clock"; 
 import Gadget from "./gadgets/gadget";

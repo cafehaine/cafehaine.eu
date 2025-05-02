@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import sanitizeHtml from "sanitize-html"
 import Gadget from "./gadget"
 import styles from "./rss.module.css"
@@ -11,13 +11,14 @@ enum Source {
   Unknown = "?",
 }
 
-const DOMAIN_SOURCE_MAP = {
-  "fosstodon.org": Source.Fosstodon,
-  "cafehaine.itch.io": Source.Itch,
-  "gemma-pricot.itch.io": Source.Itch,
-  "itch.io": Source.Itch,
-  "nitter.poast.org": Source.Twitter,
-};
+const DOMAIN_SOURCE_MAP: Map<string, Source> = new Map(
+  Object.entries({
+    "fosstodon.org": Source.Fosstodon,
+    "cafehaine.itch.io": Source.Itch,
+    "gemma-pricot.itch.io": Source.Itch,
+    "itch.io": Source.Itch,
+    "nitter.poast.org": Source.Twitter,
+  }));
 
 type Article = {
   title: string,
@@ -35,11 +36,10 @@ enum RequestState {
 
 function RSSComponent(): React.ReactNode {
   const [articles, setArticles] = useState<Article[] | RequestState>(RequestState.Offline)
-  const [popupArticle, setPopupArticle] = useState<Article | null>(null)
 
   const fetchArticles = async () => {
     setArticles(RequestState.Fetching)
-    var response;
+    let response;
     try {
       response = await fetch("//feed.cafehaine.eu/");
     } catch {
@@ -61,12 +61,12 @@ function RSSComponent(): React.ReactNode {
             content: content,
             url: url,
             datePublished: new Date(item["date_published"]),
-            source: DOMAIN_SOURCE_MAP[url.hostname] || Source.Unknown,
+            source: DOMAIN_SOURCE_MAP.get(url.hostname) || Source.Unknown,
           }
-          console.log({hostname: url.hostname, source: article.source})
+          console.log({ hostname: url.hostname, source: article.source })
           newArticles.push(article)
         }
-        newArticles.sort((a, b) => b.datePublished - a.datePublished);
+        newArticles.sort((a, b) => b.datePublished.getTime() - a.datePublished.getTime());
         setArticles(newArticles);
       } catch {
         setArticles(RequestState.Failed)

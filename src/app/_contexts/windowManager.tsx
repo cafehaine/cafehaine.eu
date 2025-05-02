@@ -41,10 +41,10 @@ export const WindowContext = createContext<WindowProps>(
   {
     focused: false,
     maximized: false,
-    setMaximized: (maximized: boolean) => { },
+    setMaximized: (_maximized: boolean) => { },
     close: () => { },
     reduce: () => { },
-    setDragging: (drag: Drag) => { },
+    setDragging: (_drag: Drag) => { },
   }
 );
 export const WindowManagerContext = createContext<WindowManager>(
@@ -52,9 +52,8 @@ export const WindowManagerContext = createContext<WindowManager>(
     windows: [],
     reducedWindows: [],
     focusedWindow: null,
-    closeWindow: (win) => {},
-    openWindow: (win) => {},
-    toggleFocus: (win) => {},
+    closeWindow: (_win) => {},
+    openWindow: (_win) => {},
+    toggleFocus: (_win) => {},
   }
 );
-export default 0;

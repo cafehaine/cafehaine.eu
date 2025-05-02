@@ -28,11 +28,11 @@ export default class About extends CustomWindow {
         </nav>
         <section>
           <h2>About me</h2>
-          <p>Hi! I'm CaféHaine, a french guy that loves open source :)</p>
-          <p>These days, I mostly write code in python, but I've had experience with many different languages.</p>
+          <p>Hi! I&apos;m CaféHaine, a french guy that loves open source :)</p>
+          <p>These days, I mostly write code in python, but I&apos;ve had experience with many different languages.</p>
           <footer>
             <p>The source for this site is available here: <a href="https://github.com/cafehaine/cafehaine.eu">https://github.com/cafehaine/cafehaine.eu</a></p>
-            <p>The background/wallpaper is <a href="https://www.pexels.com/fr-fr/photo/aurores-boreales-360912/">Visit Greenland's photo</a></p>
+            <p>The background/wallpaper is <a href="https://www.pexels.com/fr-fr/photo/aurores-boreales-360912/">Visit Greenland&apos;s photo</a></p>
           </footer>
         </section>
       </>

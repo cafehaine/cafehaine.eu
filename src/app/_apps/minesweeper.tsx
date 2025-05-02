@@ -29,7 +29,7 @@ export default class Minesweeper extends CustomWindow {
       <footer>
         <ul>
           <li title="Time spent">
-            <Image src={null} alt="clock icon" />
+            {/*<Image src={null} alt="clock icon" />*/}
             <span>0</span>
           </li>
           <li title="Mines found">

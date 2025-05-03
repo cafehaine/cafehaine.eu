@@ -21,7 +21,7 @@ export default class About extends CustomWindow {
           <ul>
             <li><a href="https://gitlab.com/cafehaine">Gitlab</a></li>
             <li><a href="https://github.com/cafehaine">GitHub</a></li>
-            <li><a href="https://fosstodon.org/@cafehaine">@cafehaine@fosstodon.org</a></li>
+            <li><a href="https://pouet.chapril.org/@cafehaine">@cafehaine@pouet.chapril.org</a></li>
             <li><a href="https://cafehaine.itch.io/">Itch.io</a></li>
             <li><a href="https://code.golf/golfers/cafehaine">Code.golf</a></li>
           </ul>

@@ -27,7 +27,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <meta property="twitter:image" content="preview.png" />
 
         {/* Mastodon verification */}
-        <link rel="me" href="https://fosstodon.org/@cafehaine" />
+        <link rel="me" href="https://pouet.chapril.org/@cafehaine" />
 
       </head>
       <body>

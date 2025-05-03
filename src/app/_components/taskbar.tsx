@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from 'react';
 import { WindowManagerContext } from './../_contexts/windowManager';
 import avatar from "./avatar.svg";
 import About from '../_apps/about';
-import Minesweeper from '../_apps/minesweeper';
+//import Minesweeper from '../_apps/minesweeper';
 import styles from "./taskbar.module.css"
 
 export function Clock() {
@@ -38,7 +38,7 @@ export default function Taskbar({ hasMaximizedWindows }: { hasMaximizedWindows: 
             <nav>
               <ul>
                 <li><button onClick={() => { windowManager.openWindow(new About()); setShowStartMenu(false) }}>About</button></li>
-                <li><button onClick={() => { windowManager.openWindow(new Minesweeper()); setShowStartMenu(false) }}>Minesweeper</button></li>
+                {/* <li><button onClick={() => { windowManager.openWindow(new Minesweeper()); setShowStartMenu(false) }}>Minesweeper</button></li> */}
               </ul>
               <input type="search" disabled />
             </nav>
@@ -46,7 +46,7 @@ export default function Taskbar({ hasMaximizedWindows }: { hasMaximizedWindows: 
               <ul>
                 <li><a href="https://gitlab.com/cafehaine">Gitlab</a></li>
                 <li><a href="https://github.com/cafehaine">GitHub</a></li>
-                <li><a href="https://fosstodon.org/@cafehaine">@cafehaine@fosstodon.org</a></li>
+                <li><a href="https://pouet.chapril.org/@cafehaine">@cafehaine@pouet.chapril.org</a></li>
                 <li><a href="https://cafehaine.itch.io/">Itch.io</a></li>
                 <li><a href="https://code.golf/golfers/cafehaine">Code.golf</a></li>
               </ul>

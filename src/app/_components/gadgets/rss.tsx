@@ -6,6 +6,7 @@ import Spinner from "../spinner"
 
 enum Source {
   Fosstodon = "fosstodon",
+  PouetChapril = "pouet.chapril.org",
   Twitter = "twitter",
   Itch = "itch.io",
   Unknown = "?",
@@ -18,6 +19,7 @@ const DOMAIN_SOURCE_MAP: Map<string, Source> = new Map(
     "gemma-pricot.itch.io": Source.Itch,
     "itch.io": Source.Itch,
     "nitter.poast.org": Source.Twitter,
+    "pouet.chapril.org": Source.PouetChapril,
   }));
 
 type Article = {

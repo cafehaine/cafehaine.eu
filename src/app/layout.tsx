@@ -1,4 +1,5 @@
 import './globals.css'
+import preview from "./preview.png";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -17,14 +18,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <meta property="og:url" content="https://cafehaine.eu/" />
         <meta property="og:title" content="CaféHaine" />
         <meta property="og:description" content="I make stuff with code." />
-        <meta property="og:image" content="preview.png" />
+        <meta property="og:image" content={preview.src} />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://cafehaine.eu/" />
         <meta property="twitter:title" content="CaféHaine" />
         <meta property="twitter:description" content="I make stuff with code." />
-        <meta property="twitter:image" content="preview.png" />
+        <meta property="twitter:image" content={preview.src} />
 
         {/* Mastodon verification */}
         <link rel="me" href="https://pouet.chapril.org/@cafehaine" />
